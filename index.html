@@ -1,138 +1,742 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunday Salau | AI/ML Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body { background-color: #0f172a; color: #f8fafc; }
-        .gradient-text {
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(51, 65, 85, 1);
-            transition: all 0.3s ease;
-        }
-        .card:hover { transform: translateY(-5px); border-color: #38bdf8; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunday Salau — AI/ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --card: #0f161e;
+    --border: rgba(0,255,170,0.12);
+    --border2: rgba(0,255,170,0.25);
+    --accent: #00ffaa;
+    --accent2: #00c4ff;
+    --accent3: #7b61ff;
+    --text: #e8f4f0;
+    --muted: #6b8c82;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,170,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,170,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 3rem;
+    font-family: var(--mono);
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #00e699; transform: translateY(-2px); }
+
+  .btn-outline {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--border2);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(0,255,170,0.05); }
+
+  .blink {
+    display: inline-block;
+    width: 3px;
+    height: 1.1em;
+    background: var(--accent);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .about-text {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .about-text p + p { margin-top: 1rem; }
+  .about-text em { color: var(--accent); font-style: normal; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    border: 1px solid var(--border);
+  }
+  .stat-box {
+    padding: 1.5rem;
+    background: var(--card);
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .stat-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: var(--mono);
+    display: block;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 4px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.2s;
+    transform-origin: bottom;
+  }
+  .skill-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+  .skill-card:hover::before { transform: scaleY(1); }
+  .skill-icon {
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+  }
+  .skill-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.4rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.75rem;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    transition: border-color 0.2s;
+    position: relative;
+  }
+  .project-card:hover { border-color: var(--border2); }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--border2);
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+  .project-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+    font-family: var(--mono);
+  }
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 4px 10px;
+    background: rgba(0,255,170,0.06);
+    border: 1px solid rgba(0,255,170,0.15);
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .project-link {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--accent); }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:first-child { border-top: 1px solid var(--border); }
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    padding-top: 3px;
+  }
+  .exp-role {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+  }
+  .exp-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-family: var(--mono);
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .contact-heading span { color: var(--accent); }
+  .contact-sub {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--border2); color: var(--accent); background: rgba(0,255,170,0.03); }
+  .contact-link-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .footer-accent {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    h1 { letter-spacing: -1px; }
+    .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
 </head>
-<body class="font-sans">
+<body>
 
-    <!-- Navigation -->
-    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
-        <div class="text-2xl font-bold tracking-tighter">S<span class="text-sky-400">.</span>SALAU</div>
-        <div class="space-x-6 text-sm font-medium uppercase tracking-widest text-slate-400">
-            <a href="#projects" class="hover:text-sky-400">Projects</a>
-            <a href="#stack" class="hover:text-sky-400">Stack</a>
-            <a href="#contact" class="hover:text-sky-400 border border-sky-400 px-4 py-2 rounded-full">Hire Me</a>
-        </div>
-    </nav>
+<nav>
+  <div class="logo">SS // AI-ML</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <!-- Hero Section -->
-    <header class="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div>
-            <h2 class="text-sky-400 font-mono mb-2">import Sunday_Salau as AI_Engineer</h2>
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
-                Building the <span class="gradient-text">Intelligence</span> of tomorrow.
-            </h1>
-            <p class="text-slate-400 text-lg mb-8 max-w-md">
-                Specializing in Computer Vision, Predictive Analytics, and Large Language Models. Turning raw data into production-ready insights.
-            </p>
-            <div class="flex gap-4">
-                <a href="#" class="bg-sky-500 hover:bg-sky-600 px-8 py-3 rounded-lg font-bold transition">View GitHub</a>
-                <a href="#" class="bg-slate-800 hover:bg-slate-700 px-8 py-3 rounded-lg font-bold transition">Resume</a>
-            </div>
-        </div>
-        <div class="hidden md:block bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-2xl">
-            <div class="flex gap-2 mb-4">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            </div>
-            <code class="text-sky-300 block">
-                <span class="text-pink-400">def</span> <span class="text-yellow-300">solve_problem</span>(data):<br>
-                &nbsp;&nbsp;model = TransformerBlock(heads=8)<br>
-                &nbsp;&nbsp;trained_model = model.fit(data)<br>
-                &nbsp;&nbsp;<span class="text-pink-400">return</span> trained_model.deploy()<br><br>
-                <span class="text-slate-500"># Result: 98.4% Accuracy achieved</span>
-            </code>
-        </div>
-    </header>
+<div class="hero">
+  <div class="hero-tag">Available for opportunities</div>
+  <h1>Sunday<br><span>Salau</span></h1>
+  <p class="hero-sub">AI / ML Engineer specializing in NLP, large language models &amp; generative AI systems.<span class="blink"></span></p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="#contact" class="btn-outline">Get in Touch</a>
+  </div>
+</div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
-        <h3 class="text-3xl font-bold mb-12 flex items-center gap-4">
-            Featured Projects <div class="h-px bg-slate-700 flex-grow"></div>
-        </h3>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Project 1 -->
-            <div class="card p-8 rounded-2xl">
-                <div class="text-sky-400 text-xs font-mono mb-2">NLP / PyTorch</div>
-                <h4 class="text-2xl font-bold mb-3">Custom LLM Fine-Tuning</h4>
-                <p class="text-slate-400 mb-6 text-sm">Fine-tuned Llama-3 on medical datasets to provide accurate diagnostic suggestions with 40% reduced latency.</p>
-                <div class="flex gap-3">
-                    <span class="bg-slate-800 text-xs px-3 py-1 rounded">HuggingFace</span>
-                    <span class="bg-slate-800 text-xs px-3 py-1 rounded">AWS Sagemaker</span>
-                </div>
-            </div>
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">// 01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>I'm <em>Sunday Salau</em>, an AI/ML Engineer with 2–4 years of experience building intelligent systems powered by natural language processing and generative AI.</p>
+      <p>I specialize in designing, fine-tuning, and deploying <em>large language models</em> for real-world applications — from conversational agents to document intelligence pipelines.</p>
+      <p>My work lives at the intersection of research and engineering: translating cutting-edge ideas into <em>production-ready systems</em> that actually work under pressure.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Years XP</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">LLMs Fine-tuned</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Remote-ready</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <!-- Project 2 -->
-            <div class="card p-8 rounded-2xl">
-                <div class="text-sky-400 text-xs font-mono mb-2">Computer Vision / OpenCV</div>
-                <h4 class="text-2xl font-bold mb-3">Real-time Object Detection</h4>
-                <p class="text-slate-400 mb-6 text-sm">Deployed a YOLOv8 model for industrial safety monitoring, identifying PPE violations in real-time.</p>
-                <div class="flex gap-3">
-                    <span class="bg-slate-800 text-xs px-3 py-1 rounded">Docker</span>
-                    <span class="bg-slate-800 text-xs px-3 py-1 rounded">FastAPI</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">// 02</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-icon">[ LLM ]</div>
+      <div class="skill-name">Large Language Models</div>
+      <div class="skill-tags">
+        <span class="tag">GPT-4</span><span class="tag">Claude</span><span class="tag">LLaMA</span><span class="tag">Mistral</span><span class="tag">Fine-tuning</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">[ NLP ]</div>
+      <div class="skill-name">Natural Language Processing</div>
+      <div class="skill-tags">
+        <span class="tag">HuggingFace</span><span class="tag">spaCy</span><span class="tag">BERT</span><span class="tag">RAG</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">[ GEN ]</div>
+      <div class="skill-name">Generative AI</div>
+      <div class="skill-tags">
+        <span class="tag">LangChain</span><span class="tag">LlamaIndex</span><span class="tag">Agents</span><span class="tag">Diffusion</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">[ ML ]</div>
+      <div class="skill-name">ML Engineering</div>
+      <div class="skill-tags">
+        <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Scikit-learn</span><span class="tag">ONNX</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">[ OPS ]</div>
+      <div class="skill-name">MLOps &amp; Deployment</div>
+      <div class="skill-tags">
+        <span class="tag">Docker</span><span class="tag">FastAPI</span><span class="tag">AWS</span><span class="tag">MLflow</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">[ DEV ]</div>
+      <div class="skill-name">Engineering Stack</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Git</span><span class="tag">REST APIs</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Skills / Stack -->
-    <section id="stack" class="py-20 bg-slate-900/50">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h3 class="text-3xl font-bold mb-16">Technical Arsenal</h3>
-            <div class="flex flex-wrap justify-center gap-12 opacity-70">
-                <div class="flex flex-col items-center gap-2">
-                    <i class="fab fa-python text-4xl"></i>
-                    <span class="text-xs uppercase tracking-tighter">Python</span>
-                </div>
-                <div class="flex flex-col items-center gap-2">
-                    <i class="fas fa-brain text-4xl"></i>
-                    <span class="text-xs uppercase tracking-tighter">TensorFlow</span>
-                </div>
-                <div class="flex flex-col items-center gap-2">
-                    <i class="fas fa-database text-4xl"></i>
-                    <span class="text-xs uppercase tracking-tighter">PostgreSQL</span>
-                </div>
-                <div class="flex flex-col items-center gap-2">
-                    <i class="fab fa-docker text-4xl"></i>
-                    <span class="text-xs uppercase tracking-tighter">Docker</span>
-                </div>
-                <div class="flex flex-col items-center gap-2">
-                    <i class="fab fa-aws text-4xl"></i>
-                    <span class="text-xs uppercase tracking-tighter">AWS</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">// 03</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="project-num">// project_01</div>
+      <div class="project-title">Conversational RAG System</div>
+      <p class="project-desc">Built a retrieval-augmented generation pipeline for enterprise document Q&amp;A — ingests 100k+ pages with semantic chunking and hybrid search.</p>
+      <div class="project-stack">
+        <span class="stack-tag">LangChain</span><span class="stack-tag">Pinecone</span><span class="stack-tag">GPT-4</span><span class="stack-tag">FastAPI</span>
+      </div>
+      <a href="#" class="project-link">↗</a>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">// project_02</div>
+      <div class="project-title">LLM Fine-tuning Pipeline</div>
+      <p class="project-desc">Domain-adapted LLaMA-2 for legal document classification — reduced hallucination rate by 40% using RLHF + DPO on proprietary dataset.</p>
+      <div class="project-stack">
+        <span class="stack-tag">LLaMA-2</span><span class="stack-tag">PEFT/LoRA</span><span class="stack-tag">trl</span><span class="stack-tag">Weights &amp; Biases</span>
+      </div>
+      <a href="#" class="project-link">↗</a>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">// project_03</div>
+      <div class="project-title">Multimodal AI Agent</div>
+      <p class="project-desc">Autonomous agent with tool-use, vision, and memory — deployed as a customer support copilot handling 2k+ daily interactions.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Claude API</span><span class="stack-tag">LlamaIndex</span><span class="stack-tag">Redis</span><span class="stack-tag">Docker</span>
+      </div>
+      <a href="#" class="project-link">↗</a>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">// project_04</div>
+      <div class="project-title">NLP Evaluation Framework</div>
+      <p class="project-desc">Open-source toolkit for evaluating LLM outputs — semantic similarity, factual consistency, and toxicity scoring across 15+ metrics.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">HuggingFace</span><span class="stack-tag">RAGAS</span><span class="stack-tag">Pytest</span>
+      </div>
+      <a href="#" class="project-link">↗</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer / Contact -->
-    <footer id="contact" class="py-20 px-6 text-center border-t border-slate-800">
-        <h3 class="text-4xl font-bold mb-4">Let's build something <span class="text-sky-400">smarter</span>.</h3>
-        <p class="text-slate-400 mb-8">Currently available for specialized ML consulting and full-time roles.</p>
-        <a href="mailto:sunday@example.com" class="text-xl font-medium underline hover:text-sky-400">sunday.salau@email.com</a>
-        <div class="mt-12 text-slate-600 text-sm">
-            &copy; 2026 Sunday Salau. Built with code & neurons.
-        </div>
-    </footer>
+<section id="experience">
+  <div class="section-header fade-in">
+    <span class="section-num">// 04</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item fade-in">
+      <div class="exp-date">2023 — Present</div>
+      <div>
+        <div class="exp-role">AI/ML Engineer</div>
+        <div class="exp-company">// [Your Current Company]</div>
+        <p class="exp-desc">Designing and deploying LLM-based applications for production. Building RAG systems, prompt engineering pipelines, and AI evaluation frameworks. Collaborating with product teams to translate business requirements into model capabilities.</p>
+      </div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-date">2021 — 2023</div>
+      <div>
+        <div class="exp-role">Machine Learning Engineer</div>
+        <div class="exp-company">// [Previous Company]</div>
+        <p class="exp-desc">Developed NLP models for text classification, entity recognition, and sentiment analysis. Fine-tuned transformer architectures and shipped models to REST API endpoints serving millions of requests monthly.</p>
+      </div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-date">Education</div>
+      <div>
+        <div class="exp-role">B.Sc. Computer Science</div>
+        <div class="exp-company">// [Your University]</div>
+        <p class="exp-desc">Focus on machine learning, algorithms, and software engineering. Graduated with distinction. Active in AI research lab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-num">// 05</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-inner fade-in">
+    <div>
+      <h3 class="contact-heading">Let's build<br><span>something</span> great.</h3>
+      <p class="contact-sub">Open to full-time roles, freelance projects, and AI research collaborations. I reply within 24 hours.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:sunday@example.com" class="contact-link">
+        <span class="contact-link-icon">@</span>
+        sunday@example.com
+      </a>
+      <a href="https://linkedin.com/in/sundaysalau" class="contact-link">
+        <span class="contact-link-icon">in</span>
+        linkedin.com/in/sundaysalau
+      </a>
+      <a href="https://github.com/sundaysalau" class="contact-link">
+        <span class="contact-link-icon">&lt;/&gt;</span>
+        github.com/sundaysalau
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-icon">&#8595;</span>
+        Download Resume (PDF)
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Sunday Salau. All rights reserved.</div>
+  <div class="footer-accent">NLP // LLM // GEN-AI</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
